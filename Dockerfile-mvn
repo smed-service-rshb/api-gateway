@@ -1,0 +1,7 @@
+############################################################
+# Dockerfile to build mvn container images
+# Based on docker.dos.softlab.ru/rshb/efr/communication-systems/library/mvn-3.5
+############################################################
+
+# Use base docker.dos.softlab.ru/rshb/efr/communication-systems/library/mvn-3.5 image as the base
+FROM docker.dos.softlab.ru/rshb/efr/communication-systems/library/mvn-3.5

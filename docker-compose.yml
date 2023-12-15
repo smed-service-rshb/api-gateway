@@ -1,0 +1,51 @@
+version: '2.1'
+services:
+
+  # active-mq МС ЕФР
+  efr-mq:
+    image: docker.dos.softlab.ru/rshb/efr/communication-systems/library/active-mq
+    ports:
+      - "8161:8161"
+      - "61616:61616"
+
+  # приложение api-gateway-app
+  api-gateway-app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile-app
+    image: docker.dos.softlab.ru/smedservice/api-gateway/api-gateway-app:${BUILD_IMAGE_TAG}
+    ports:
+      - "8080:8080"
+      - "9990:9990"
+      - "8787:8787"
+    links:
+      - efr-mq
+
+  # приложение some-service-app
+  some-service-app:
+    build:
+      context: ./test-apps/some-service
+      dockerfile: Dockerfile-app
+    image: docker.dos.softlab.ru/smedservice/api-gateway/mock/some-service-app:${BUILD_IMAGE_TAG}
+    ports:
+      - "8081:8080"
+      - "9991:9990"
+      - "8781:8787"
+    links:
+      - efr-mq
+
+  # приложение auth-service-db
+  auth-service-db:
+    image: docker.dos.softlab.ru/smedservice/auth-service/auth-service-db:${STAND_IMAGE_TAG}
+    ports:
+      - "5432:5432"
+
+  # приложение auth-service-app
+  auth-service-app:
+    image: docker.dos.softlab.ru/smedservice/auth-service/${BUILD_MODE:-dev}/auth-service-app:${STAND_IMAGE_TAG}
+    ports:
+      - "8082:7001"
+      - "8452:8453"
+    links:
+      - efr-mq
+      - auth-service-db:service-db

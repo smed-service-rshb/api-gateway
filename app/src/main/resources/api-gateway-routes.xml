@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<routes>
+
+    <!--
+        PUBLIC      - API используется без идентификации, авторизации
+        PROTECTED   - для использования API требуется выполнить вход систему, разрешение на операцию
+        PRIVATE     - API скрыто для использования
+    -->
+    <!-- сервис авторизации -->
+    <route pattern="/auth/v1/**" service="auth-service" resourceType="PROTECTED"/>
+    <route pattern="/auth/v1/private/**" service="auth-service" resourceType="PRIVATE"/>
+    <!-- сервис страхования -->
+    <route pattern="/insurance-service/**" service="insurance-service" resourceType="PROTECTED"/>
+    <route pattern="/insurance-service/private/**" service="insurance-service" resourceType="PRIVATE"/>
+    <!-- сервис общих справочников -->
+    <route pattern="/dictionaries/**" service="common-dict-app" resourceType="PROTECTED"/>
+    <!-- сервис клиентских данных -->
+    <route pattern="/clients/**" service="clients-data-service" resourceType="PROTECTED"/>
+    <!-- сервис регистрации -->
+    <route pattern="/registration-service/**" service="registration-service" resourceType="PUBLIC"/>
+</routes>

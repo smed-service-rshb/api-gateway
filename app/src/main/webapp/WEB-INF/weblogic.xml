@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<weblogic-web-app xmlns="http://xmlns.oracle.com/weblogic/weblogic-web-app">
+    <context-root>/efrapi</context-root>
+    <container-descriptor>
+        <prefer-application-packages>
+            <package-name>antlr.*</package-name>
+            <package-name>javassist.*</package-name>
+            <package-name>javax.annotation.*</package-name>
+            <package-name>javax.decorator.*</package-name>
+            <package-name>javax.el.*</package-name>
+            <package-name>javax.enterprise.*</package-name>
+            <package-name>javax.inject.*</package-name>
+            <package-name>javax.interceptor.*</package-name>
+            <package-name>javax.jms.*</package-name>
+            <package-name>javax.management.j2ee.*</package-name>
+            <package-name>javax.persistence.*</package-name>
+            <package-name>javax.transaction.*</package-name>
+            <package-name>javax.validation.*</package-name>
+            <package-name>org.apache.commons.*</package-name>
+            <package-name>org.hibernate.validator.*</package-name>
+            <package-name>org.slf4j.*</package-name>
+        </prefer-application-packages>
+        <prefer-application-resources>
+            <resource-name>javax.persistence.*</resource-name>
+            <resource-name>org/slf4j/impl/StaticLoggerBinder.class</resource-name>
+        </prefer-application-resources>
+    </container-descriptor>
+</weblogic-web-app>

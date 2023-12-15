@@ -1,0 +1,45 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>ru.softlab.efr.common</groupId>
+        <artifactId>efr-parent-pom</artifactId>
+        <version>2.2</version>
+    </parent>
+    <groupId>ru.softlab.efr.infrastructure</groupId>
+    <artifactId>smedservice-api-gateway</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>test-apps</module>
+        <module>app</module>
+    </modules>
+
+    <distributionManagement>
+        <repository>
+            <id>coral-efr-insurance</id>
+            <name>coral-efr-insurance</name>
+            <url>http://coral:18088/repository/efr-insurance</url>
+        </repository>
+    </distributionManagement>
+
+    <properties>
+        <efr.authorization.version>1.0.5</efr.authorization.version>
+        <efr.transport.version>4.1.0</efr.transport.version>
+        <sonar.jacoco.reportPaths>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPaths>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>coral-efr</id>
+            <name>coral-efr</name>
+            <url>http://coral:18088/repository/efr</url>
+        </repository>
+        <repository>
+            <id>coral-efr-insurance</id>
+            <name>coral-efr-insurance</name>
+            <url>http://coral:18088/repository/efr-insurance</url>
+        </repository>
+    </repositories>
+</project>

@@ -1,0 +1,10 @@
+############################################################
+# Dockerfile to build api-gateway-app container image
+# Based on docker.dos.softlab.ru/rshb/efr/communication-systems/library/jboss-wildfly:10.1.01-cli
+############################################################
+
+# Use base wildfly 10.1.0 image as the base
+FROM docker.dos.softlab.ru/rshb/efr/communication-systems/library/jboss-wildfly:10.1.01-cli
+
+# Deploy app
+ADD ./target/*.war /opt/jboss/wildfly/standalone/deployments/

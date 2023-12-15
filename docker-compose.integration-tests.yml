@@ -1,0 +1,20 @@
+version: '2.1'
+services:
+
+  # запуск интеграционных тестов
+  integration-test:
+    build:
+      context: .
+      dockerfile: Dockerfile-mvn
+    dns:
+      - 172.16.35.3
+      - 8.8.8.8
+    dns_search:
+      - softlab.ru
+      - rsvologda.local
+    volumes:
+      - .:/tmp/app
+      - /tmp/docker/.m2:/opt/jboss/.m2
+    command: mvn -v
+    environment:
+      - efr.test.run.mode=docker

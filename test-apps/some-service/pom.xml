@@ -1,0 +1,73 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>ru.softlab.efr.infrastructure</groupId>
+        <artifactId>api-gateway-test-apps</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>api-gateway-test-apps-some-service</artifactId>
+    <packaging>war</packaging>
+
+    <properties>
+        <war>mock-some-service.war</war>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>ru.softlab.efr.infrastructure</groupId>
+            <artifactId>transport-support</artifactId>
+            <version>${efr.transport.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-spring</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>mock-some-service</finalName>
+        <resources>
+            <resource>
+                <directory>${project.basedir}/src/main/resources</directory>
+            </resource>
+            <resource>
+                <directory>${project.basedir}/../../app/src/test/resources</directory>
+                <includes>
+                    <include>test_jasper.pdf</include>
+                </includes>
+            </resource>
+        </resources>
+
+        <plugins>
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <configuration>
+                    <skip>false</skip>
+                    <images>
+                        <image>
+                            <name>docker.dos.softlab.ru/rshb/efr/infrastructure/api-gateway/mock/some-service-app</name>
+                            <alias>api-gateway-app</alias>
+                            <build>
+                                <nocache>true</nocache>
+                                <tags>
+                                    <tag>pr</tag>
+                                </tags>
+                                <dockerFileDir>${project.basedir}</dockerFileDir>
+                                <dockerFile>Dockerfile-app</dockerFile>
+                            </build>
+                        </image>
+                    </images>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
