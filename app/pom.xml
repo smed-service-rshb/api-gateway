@@ -2,8 +2,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>ru.softlab.efr.infrastructure</groupId>
-        <artifactId>smedservice-api-gateway</artifactId>
+        <groupId>ru.softlab.insurance.sms.services</groupId>
+        <artifactId>api-gateway</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
@@ -17,13 +17,13 @@
             <version>${efr.transport.version}</version>
         </dependency>
         <dependency>
-            <groupId>ru.softlab.efr.authentication</groupId>
-            <artifactId>smedservice-auth-service-support</artifactId>
+            <groupId>ru.softlab.insurance.sms.services</groupId>
+            <artifactId>auth-service-support</artifactId>
             <version>${efr.authorization.version}</version>
         </dependency>
         <dependency>
-            <groupId>ru.softlab.efr.authentication</groupId>
-            <artifactId>smedservice-auth-service-client</artifactId>
+            <groupId>ru.softlab.insurance.sms.services</groupId>
+            <artifactId>auth-service-client</artifactId>
             <version>${efr.authorization.version}</version>
         </dependency>
 
