@@ -1,13 +1,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>ru.softlab.efr.common</groupId>
         <artifactId>efr-parent-pom</artifactId>
         <version>2.2</version>
     </parent>
-    <groupId>ru.softlab.efr.infrastructure</groupId>
-    <artifactId>smedservice-api-gateway</artifactId>
+
+    <groupId>ru.softlab.insurance.sms.services</groupId>
+    <artifactId>api-gateway</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
@@ -16,30 +18,94 @@
         <module>app</module>
     </modules>
 
+    <scm>
+        <url>https://github.com/smed-service-rshb/auth-service</url>
+        <developerConnection>scm:git:git@github.com:smed-service-rshb/auth-service.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
+    <repositories>
+        <repository>
+            <id>coral</id>
+            <name>coral</name>
+            <url>https://nexus.dos.softlab.ru/repository/maven-dcr-rshb-insurance</url>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>coral</id>
+            <url>https://nexus.dos.softlab.ru/repository/maven-dcr-rshb-insurance</url>
+        </pluginRepository>
+    </pluginRepositories>
+
     <distributionManagement>
         <repository>
-            <id>coral-efr-insurance</id>
-            <name>coral-efr-insurance</name>
-            <url>http://coral:18088/repository/efr-insurance</url>
+            <id>coral</id>
+            <name>coral</name>
+            <url>https://nexus.dos.softlab.ru/repository/maven-dcr-rshb-insurance-publish</url>
         </repository>
     </distributionManagement>
 
     <properties>
-        <efr.authorization.version>1.0.5</efr.authorization.version>
+        <efr.authorization.version>0.0.1</efr.authorization.version>
         <efr.transport.version>4.1.0</efr.transport.version>
         <sonar.jacoco.reportPaths>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPaths>
     </properties>
 
-    <repositories>
-        <repository>
-            <id>coral-efr</id>
-            <name>coral-efr</name>
-            <url>http://coral:18088/repository/efr</url>
-        </repository>
-        <repository>
-            <id>coral-efr-insurance</id>
-            <name>coral-efr-insurance</name>
-            <url>http://coral:18088/repository/efr-insurance</url>
-        </repository>
-    </repositories>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>3.0.0-M4</version>
+                <configuration>
+                    <tagNameFormat>v-@{project.version}</tagNameFormat>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>buildnumber-maven-plugin</artifactId>
+                <version>1.4</version>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>create</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <getRevisionOnlyOnce>true</getRevisionOnlyOnce>
+                    <shortRevisionLength>8</shortRevisionLength>
+                    <attach>true</attach>
+                    <addOutputDirectoryToResources>true</addOutputDirectoryToResources>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <Build-Time>${maven.build.timestamp}</Build-Time>
+                        </manifestEntries>
+                        <manifestSections>
+                            <manifestSection>
+                                <name>Versions</name>
+                                <manifestEntries>
+                                    <Implementation-Version>${project.version}</Implementation-Version>
+                                    <Implementation-SCM-Revision>${buildNumber}</Implementation-SCM-Revision>
+                                    <Implementation-SCM-Branch>${scmBranch}</Implementation-SCM-Branch>
+                                </manifestEntries>
+                            </manifestSection>
+                        </manifestSections>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>
