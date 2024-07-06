@@ -13,11 +13,6 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <modules>
-        <module>test-apps</module>
-        <module>app</module>
-    </modules>
-
     <scm>
         <url>https://github.com/smed-service-rshb/auth-service</url>
         <developerConnection>scm:git:git@github.com:smed-service-rshb/auth-service.git</developerConnection>
